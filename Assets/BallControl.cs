@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallControl : MonoBehaviour
 {
     public float ballSpeed = 100f;
+    public float launchDelay = 1f;
 
     private Rigidbody2D rb;
 
@@ -14,14 +15,14 @@ public class BallControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         // Launches the ball after 2 seconds
-        Invoke("LaunchBall", 2f);
+        Invoke("LaunchBall", launchDelay + 1f);
     }
 
     // Reset the position and velocity of the ball before launching it again.
     void ResetBall() {
         rb.velocity = new Vector2(0f, 0f);
         transform.position = new Vector2(0f, 0f);
-        Invoke("LaunchBall", 0.5f);
+        Invoke("LaunchBall", launchDelay);
     }
 
     // Launch the ball in a random direction.
