@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     private void OnGUI() {
         GUI.skin = skin;
-        GUI.Label(new Rect(Screen.width / 2 - 150, 20, 100, 100), playerScore01.ToString());
-        GUI.Label(new Rect(Screen.width / 2 + 150, 20, 100, 100), playerScore02.ToString());
+        GUI.Label(new Rect(Screen.width / 2 - 150 - 12, 20, 100, 100), playerScore01.ToString());
+        GUI.Label(new Rect(Screen.width / 2 + 150 - 12, 20, 100, 100), playerScore02.ToString());
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BallControl : MonoBehaviour
 {
+    public float ballSpeed = 100f;
+
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -11,11 +13,24 @@ public class BallControl : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        // Launches the ball after 2 seconds
+        Invoke("LaunchBall", 2f);
+    }
+
+    // Reset the position and velocity of the ball before launching it again.
+    void ResetBall() {
+        rb.velocity = new Vector2(0f, 0f);
+        transform.position = new Vector2(0f, 0f);
+        Invoke("LaunchBall", 0.5f);
+    }
+
+    // Launch the ball in a random direction.
+    void LaunchBall() {
         float randNum = Random.Range(0f, 1f);
         if (randNum <= 0.5) {
-            rb.AddForce(new Vector2(-80, 10));
+            rb.AddForce(new Vector2(-ballSpeed, 10));
         } else {
-            rb.AddForce(new Vector2(80, 10));
+            rb.AddForce(new Vector2(ballSpeed, 10));
         }
     }
 
