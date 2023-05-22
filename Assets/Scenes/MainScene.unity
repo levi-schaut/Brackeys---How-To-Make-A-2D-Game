@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 432577199}
   - component: {fileID: 432577198}
+  - component: {fileID: 432577200}
   m_Layer: 0
   m_Name: _GameMaster_
   m_TagString: Untagged
@@ -179,6 +180,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &432577200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432577197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e0584d8c2a84a4baf6b0540a4dc2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skin: {fileID: 11400000, guid: 3f12f3cab89d5794693ef3f98e1bcc99, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 773624225}
   - component: {fileID: 773624224}
+  - component: {fileID: 773624226}
   m_Layer: 0
   m_Name: Right Wall
   m_TagString: Untagged
@@ -290,7 +305,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -321,6 +336,18 @@ Transform:
   m_Father: {fileID: 432577199}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &773624226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773624223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee465c1a1e9fca45940360c38d96093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &909088267
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,6 +494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 912303207}
   - component: {fileID: 912303206}
+  - component: {fileID: 912303208}
   m_Layer: 0
   m_Name: Left Wall
   m_TagString: Untagged
@@ -484,7 +512,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -515,6 +543,18 @@ Transform:
   m_Father: {fileID: 432577199}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912303208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912303205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee465c1a1e9fca45940360c38d96093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &928225044
 GameObject:
   m_ObjectHideFlags: 0
