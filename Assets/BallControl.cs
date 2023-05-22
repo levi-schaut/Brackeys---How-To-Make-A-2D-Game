@@ -8,11 +8,14 @@ public class BallControl : MonoBehaviour
     public float launchDelay = 1f;
 
     private Rigidbody2D rb;
+    private AudioSource click;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        click = GetComponent<AudioSource>();
 
         // Launches the ball after 2 seconds
         Invoke("LaunchBall", launchDelay + 1f);
@@ -42,6 +45,9 @@ public class BallControl : MonoBehaviour
             Vector2 ballVel = rb.velocity;
             Vector2 playVel = collision.collider.attachedRigidbody.velocity;
             rb.velocity = new Vector2(ballVel.x, ballVel.y / 2 + playVel.y / 2);
+
+            click.pitch = Random.Range(0.9f, 1.1f);
+            click.Play();
         }
     }
 }
