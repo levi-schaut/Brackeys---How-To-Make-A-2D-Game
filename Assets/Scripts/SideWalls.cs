@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class SideWalls : MonoBehaviour
 {
-    private AudioSource collisionSound;
-
-    private void Start() {
-        collisionSound = GetComponent<AudioSource>();
-    }
+    public AudioSource scoreSound;
+    public BallControl ball;
 
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.name == "Ball") {
-            collisionSound.Play();
-            string wallName = transform.name;
-            GameManager.Score(wallName);
-            collision.gameObject.SendMessage("ResetBall");
+            scoreSound.Play();
+            string wallTag = transform.tag;
+            GameManager.Score(wallTag);
+
+            string launchDirection;
+            if (wallTag == "LeftWall") {
+                launchDirection = "Right";
+            } else {
+                launchDirection = "Left";
+            }
+            ball.ResetBall(launchDirection);
         }
     }
 }

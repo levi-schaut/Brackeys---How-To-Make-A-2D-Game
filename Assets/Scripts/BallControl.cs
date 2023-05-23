@@ -7,46 +7,64 @@ public class BallControl : MonoBehaviour
     public float ballSpeed = 100f;
     public float launchDelay = 1f;
 
-    private Rigidbody2D rb;
-    private AudioSource click;
+    public Rigidbody2D ballRigidbody;
+    public AudioSource clickSound;
+    private bool ballIsLaunching;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        click = GetComponent<AudioSource>();
-
         // Launches the ball after 2 seconds
-        Invoke("LaunchBall", launchDelay + 1f);
+        StartCoroutine(WaitToLaunchBall(launchDelay + 1f));
+    }
+
+    IEnumerator WaitToLaunchBall(float waitTime, string direction = "Random")
+    {
+        ballIsLaunching = true;
+
+        yield return new WaitForSeconds(waitTime);
+        LaunchBall(direction);
+
+        ballIsLaunching = false;
     }
 
     // Reset the position and velocity of the ball before launching it again.
-    void ResetBall() 
+    public void ResetBall(string direction = "Random") 
     {
-        rb.velocity = new Vector2(0f, 0f);
-        transform.position = new Vector2(0f, 0f);
-        Invoke("LaunchBall", launchDelay);
+        if (!ballIsLaunching) {
+            ballRigidbody.velocity = new Vector2(0f, 0f);
+            transform.position = new Vector2(0f, 0f);
+            StartCoroutine(WaitToLaunchBall(launchDelay, direction));
+        }
     }
 
-    // Launch the ball in a random direction.
-    void LaunchBall() 
+    // Launch the ball in a given or random direction.
+    void LaunchBall(string direction = "Random") 
     {
-        float randNum = Random.Range(0f, 1f);
-        if (randNum <= 0.5) {
-            rb.AddForce(new Vector2(-ballSpeed, 10));
+        if (direction == "Random") {
+            if (Random.Range(0f, 1f) <= 0.5) {
+                direction = "Left";
+            }
+            else {
+                direction = "Right";
+            }
+        }
+        float launchAngle = Random.Range(-20f, 20f);
+        if (direction == "Left") {
+            ballRigidbody.AddForce(new Vector2(-ballSpeed, launchAngle));
         } else {
-            rb.AddForce(new Vector2(ballSpeed, 10));
+            ballRigidbody.AddForce(new Vector2(ballSpeed, launchAngle));
         }
     }
 
     // Update is called once per frame
-    void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player") 
         {
             // Capture the initial velocities of both objects
-            Vector2 ballVel = rb.velocity;
+            Vector2 ballVel = ballRigidbody.velocity;
             Vector2 playVel = collision.collider.attachedRigidbody.velocity;
 
             // Correct the y-velocity of the ball
@@ -60,11 +78,11 @@ public class BallControl : MonoBehaviour
             }
 
             // Set the ball's new velocity to the corrected velocity
-            rb.velocity = ballVel;
+            ballRigidbody.velocity = ballVel;
 
             // Play the "click" sound effect with a random pitch
-            click.pitch = Random.Range(0.9f, 1.1f);
-            click.Play();
+            clickSound.pitch = Random.Range(0.9f, 1.1f);
+            clickSound.Play();
         }
     }
 }
