@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skin: {fileID: 11400000, guid: 3f12f3cab89d5794693ef3f98e1bcc99, type: 2}
+  ball: {fileID: 909088271}
 --- !u!82 &432577201
 AudioSource:
   m_ObjectHideFlags: 0
@@ -206,7 +207,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 952c93596091a4247b0fd2563e89ec36, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
