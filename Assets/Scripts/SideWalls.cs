@@ -15,7 +15,14 @@ public class SideWalls : MonoBehaviour
             collisionSound.Play();
             string wallName = transform.name;
             GameManager.Score(wallName);
-            collision.gameObject.SendMessage("ResetBall");
+
+            string launchDirection;
+            if (wallName == "Left Wall") {
+                launchDirection = "Right";
+            } else {
+                launchDirection = "Left";
+            }
+            collision.gameObject.SendMessage("ResetBall", launchDirection);
         }
     }
 }

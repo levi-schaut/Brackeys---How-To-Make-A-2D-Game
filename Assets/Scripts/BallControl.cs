@@ -10,6 +10,13 @@ public class BallControl : MonoBehaviour
     private Rigidbody2D rb;
     private AudioSource click;
 
+    //public enum LaunchDirection
+    //{
+    //    Left,
+    //    Right,
+    //    Random
+    //}
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,25 +25,40 @@ public class BallControl : MonoBehaviour
         click = GetComponent<AudioSource>();
 
         // Launches the ball after 2 seconds
-        Invoke("LaunchBall", launchDelay + 1f);
+        StartCoroutine(WaitToLaunchBall(launchDelay + 1f));
+    }
+
+    IEnumerator WaitToLaunchBall(float waitTime, string direction = "Random")
+    {
+        yield return new WaitForSeconds(waitTime);
+        LaunchBall(direction);
     }
 
     // Reset the position and velocity of the ball before launching it again.
-    void ResetBall() 
+    void ResetBall(string direction = "Random") 
     {
         rb.velocity = new Vector2(0f, 0f);
         transform.position = new Vector2(0f, 0f);
-        Invoke("LaunchBall", launchDelay);
+        StartCoroutine(WaitToLaunchBall(launchDelay, direction));
     }
 
     // Launch the ball in a random direction.
-    void LaunchBall() 
+    void LaunchBall(string direction = "Random") 
     {
-        float randNum = Random.Range(0f, 1f);
-        if (randNum <= 0.5) {
-            rb.AddForce(new Vector2(-ballSpeed, 10));
+        Debug.Log("Launch Direction = " + direction);
+        if (direction == "Random") {
+            if (Random.Range(0f, 1f) <= 0.5) {
+                direction = "Left";
+            }
+            else {
+                direction = "Right";
+            }
+        }
+        float launchAngle = Random.Range(-20f, 20f);
+        if (direction == "Left") {
+            rb.AddForce(new Vector2(-ballSpeed, launchAngle));
         } else {
-            rb.AddForce(new Vector2(ballSpeed, 10));
+            rb.AddForce(new Vector2(ballSpeed, launchAngle));
         }
     }
 
